@@ -30,7 +30,7 @@ class Day01() : genericDay(1) {
     }
 
     private fun replaceStringNumbers(line: String): String {
-        val result = Regex("(${textToIntegerMap.keys.joinToString("|")}|${textToIntegerMap.values.joinToString("|")})")
+        val result = Regex("(?=(${textToIntegerMap.keys.joinToString("|")}|${textToIntegerMap.values.joinToString("|")}))")
             .findAll(line)
         val firstResult = result.first()
         val lastResult = result.last()
@@ -39,5 +39,5 @@ class Day01() : genericDay(1) {
     }
 
     private fun stringToIntIfNecessary(firstResult: MatchResult) =
-        if (firstResult.value.length > 1) textToIntegerMap[firstResult.value].toString() else firstResult.value
+        if (firstResult.groupValues[1].length > 1) textToIntegerMap[firstResult.groupValues[1]].toString() else firstResult.groupValues[1]
 }
